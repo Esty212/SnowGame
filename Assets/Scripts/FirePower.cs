@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class FirePower : MonoBehaviour
 {
+    [SerializeField] private float meltingTime;
     private GameObject _iceCube;
 
     private void Update()
@@ -34,7 +35,7 @@ public class FirePower : MonoBehaviour
     {
         if (_iceCube != null)
         {
-            Destroy(_iceCube, 1);
+            Destroy(_iceCube, meltingTime);
         }
     }
 
