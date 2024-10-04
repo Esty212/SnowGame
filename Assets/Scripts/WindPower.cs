@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class WindPower : MonoBehaviour
 {
-    private bool inRange;
+    private bool _inRange;
     private UnityEvent<float> windBlow;
     [SerializeField] private float blowPower;
 
@@ -22,7 +22,7 @@ public class WindPower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(inRange)
+        if(_inRange)
         {
             if(Input.GetKeyDown(KeyCode.X))
             {
@@ -33,12 +33,12 @@ public class WindPower : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        inRange = true;
+        _inRange = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        inRange = false;
+        _inRange = false;
     }
 
     public void AddWindBlowEventListener(UnityAction<float> newListener)

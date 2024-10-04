@@ -6,11 +6,11 @@ using UnityEngine.Events;
 
 public class FirePower : MonoBehaviour
 {
-    private GameObject iceCube;
+    private GameObject _iceCube;
 
     private void Update()
     {
-        if (iceCube != null && Input.GetKeyDown(KeyCode.X))
+        if (_iceCube != null && Input.GetKeyDown(KeyCode.X))
         {
             DestroyIceCube();
         }
@@ -21,20 +21,20 @@ public class FirePower : MonoBehaviour
         IceCubeMovement foundIceCube = collision.GetComponent<IceCubeMovement>();
         if (foundIceCube != null)
         {
-            iceCube = foundIceCube.gameObject;
+            _iceCube = foundIceCube.gameObject;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        iceCube = null;
+        _iceCube = null;
     }
 
     void DestroyIceCube()
     {
-        if (iceCube != null)
+        if (_iceCube != null)
         {
-            Destroy(iceCube, 1);
+            Destroy(_iceCube, 1);
         }
     }
 
