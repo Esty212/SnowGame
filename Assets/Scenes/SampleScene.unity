@@ -1186,6 +1186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d476c14ea358d448a937945981f7744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meltingTime: 0.2
 --- !u!1 &779583414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,7 +1358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 821501744}
   - component: {fileID: 821501745}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: InvisibleTriggerCollider2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1411,7 +1412,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -1.3147299, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1422,7 +1423,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.2, y: 0.22}
+  m_Size: {x: 1.57054, y: 0.22}
   m_EdgeRadius: 0
 --- !u!1 &980057612
 GameObject:
@@ -1467,7 +1468,7 @@ GameObject:
   - component: {fileID: 1157586880}
   - component: {fileID: 1157586879}
   - component: {fileID: 1157586882}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: river
   m_TagString: Untagged
   m_Icon: {fileID: 0}

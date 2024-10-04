@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class FirePower : MonoBehaviour
 {
+    [SerializeField] private float meltingTime;
     private GameObject _iceCube;
 
     private void Update()
@@ -18,6 +19,7 @@ public class FirePower : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.name);
         IceCubeMovement foundIceCube = collision.GetComponent<IceCubeMovement>();
         if (foundIceCube != null)
         {
@@ -34,7 +36,7 @@ public class FirePower : MonoBehaviour
     {
         if (_iceCube != null)
         {
-            Destroy(_iceCube, 1);
+            Destroy(_iceCube, meltingTime);
         }
     }
 
