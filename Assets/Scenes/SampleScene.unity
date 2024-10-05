@@ -165,10 +165,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 15604245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 422dd8ed70962f44caeef2b1cfb1a47d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6850d697c30d3bf43a43c5ebc1b38720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _river: {fileID: 0}
+  controller: {fileID: 1588524054}
+  runSpeed: 40
+  jump: 0
+  icePower: {fileID: 779583417}
 --- !u!1 &304863805
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 304863806}
   - component: {fileID: 304863807}
+  - component: {fileID: 304863808}
   m_Layer: 0
   m_Name: InvisibleTriggerCollider
   m_TagString: Untagged
@@ -246,6 +250,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.2, y: 0.22}
   m_EdgeRadius: 0
+--- !u!114 &304863808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304863805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba17c12b35536ca4981970da0e486bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blowPower: 25
 --- !u!1 &326144342
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +356,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 356372151}
-  - component: {fileID: 356372157}
+  - component: {fileID: 356372152}
   m_Layer: 3
   m_Name: WindSnowman
   m_TagString: Untagged
@@ -364,7 +381,7 @@ Transform:
   - {fileID: 796074933}
   m_Father: {fileID: 1588524055}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &356372157
+--- !u!114 &356372152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -373,10 +390,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 356372148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba17c12b35536ca4981970da0e486bca, type: 3}
+  m_Script: {fileID: 11500000, guid: e4bf979db5c27d44b9bfeb63bb3b7747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blowPower: 25
+  controller: {fileID: 1588524054}
+  runSpeed: 40
+  jump: 0
+  windPower: {fileID: 304863808}
 --- !u!1 &429543905
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,10 +751,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 654361802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d476c14ea358d448a937945981f7744, type: 3}
+  m_Script: {fileID: 11500000, guid: ceb8530cea85b7442a44e7561aef3d91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meltingTime: 0.2
+  controller: {fileID: 1588524054}
+  runSpeed: 40
+  jump: 0
+  firePower: {fileID: 821501746}
 --- !u!1 &779583414
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,7 +768,8 @@ GameObject:
   m_Component:
   - component: {fileID: 779583415}
   - component: {fileID: 779583416}
-  m_Layer: 0
+  - component: {fileID: 779583417}
+  m_Layer: 3
   m_Name: InvisibleTriggerCollider3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,6 +836,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.2, y: 0.05565627}
   m_EdgeRadius: 0
+--- !u!114 &779583417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779583414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 422dd8ed70962f44caeef2b1cfb1a47d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &796074932
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,6 +942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 821501744}
   - component: {fileID: 821501745}
+  - component: {fileID: 821501746}
   m_Layer: 6
   m_Name: InvisibleTriggerCollider2
   m_TagString: Untagged
@@ -973,6 +1010,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.57054, y: 0.22}
   m_EdgeRadius: 0
+--- !u!114 &821501746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821501743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d476c14ea358d448a937945981f7744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meltingTime: 0.2
 --- !u!1 &833992944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,7 +1597,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1588524055}
   - component: {fileID: 1588524054}
-  - component: {fileID: 1588524053}
   - component: {fileID: 1588524058}
   - component: {fileID: 1588524057}
   - component: {fileID: 1588524056}
@@ -1558,23 +1607,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1588524053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588524052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8876e45205d68f4f8a8c05027143a53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 1588524054}
-  horizontalMove: 0
-  runSpeed: 50
-  jump: 0
-  crouch: 0
 --- !u!114 &1588524054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1587,13 +1619,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68780c71be8b80b4799f175d236423c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 470
+  m_JumpForce: 500
   m_CrouchSpeed: 0.4
   m_MovementSmoothing: 0.05
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 39
+    m_Bits: 1
   m_GroundCheck: {fileID: 1336558014}
   m_CeilingCheck: {fileID: 1276792908}
   m_CrouchDisableCollider: {fileID: 0}

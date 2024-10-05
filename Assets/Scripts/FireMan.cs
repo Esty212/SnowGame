@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceMan : PlayableCharacter
+public class FireMan : PlayableCharacter
 {
-    [SerializeField] IcePower icePower;
+    [SerializeField] FirePower firePower;
 
     protected override void SpecialAbility()
     {
-        icePower.OnFreeze();
+        firePower.DestroyIceCube();
     }
+
+
 }

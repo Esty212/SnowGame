@@ -9,17 +9,8 @@ public class FirePower : MonoBehaviour
     [SerializeField] private float meltingTime;
     private GameObject _iceCube;
 
-    private void Update()
-    {
-        if (_iceCube != null && Input.GetKeyDown(KeyCode.X))
-        {
-            DestroyIceCube();
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
         IceCubeMovement foundIceCube = collision.GetComponent<IceCubeMovement>();
         if (foundIceCube != null)
         {
@@ -32,7 +23,7 @@ public class FirePower : MonoBehaviour
         _iceCube = null;
     }
 
-    void DestroyIceCube()
+    public void DestroyIceCube()
     {
         if (_iceCube != null)
         {

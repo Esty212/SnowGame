@@ -12,8 +12,8 @@ public class IceCubeMovement : MonoBehaviour
 
     void Start()
     {
-        WindPower windPower = FindAnyObjectByType<WindPower>();
-        if(windPower != null )
+        WindPower windPower = FindAnyObjectByType<WindPower>(FindObjectsInactive.Include);
+        if (windPower != null)
             windPower.AddWindBlowEventListener(OnBlown);
     }
 
