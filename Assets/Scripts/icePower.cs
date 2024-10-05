@@ -3,17 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class icePower : MonoBehaviour
+public class IcePower : MonoBehaviour
 {
     private River _river;
-
-    private void Update()
-    {
-        if (_river != null && Input.GetKey(KeyCode.X))
-        {
-            _river.Freeze();
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,6 +18,15 @@ public class icePower : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+
         _river = null;
+    }
+
+    public void OnFreeze()
+    {
+        if (_river != null)
+        {
+            _river.Freeze();
+        }
     }
 }
