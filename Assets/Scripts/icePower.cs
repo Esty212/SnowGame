@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class icePower : MonoBehaviour
+public class IcePower : MonoBehaviour
 {
     private River _river;
 

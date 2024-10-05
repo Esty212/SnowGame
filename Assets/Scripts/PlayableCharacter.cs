@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerMovement : MonoBehaviour
+public /*abstract*/ class PlayableCharacter : MonoBehaviour/*, IDamageable*/
 {
 
     public CharacterController2D controller;
@@ -14,16 +14,28 @@ public class playerMovement : MonoBehaviour
     bool jump = false;
     bool crouch = false;
 
-    // Update is called once per frame
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+
+        Movement();
 
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
         }
 
+        //Crouch();
+    }
+
+    private void Movement()
+    {
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+    }
+
+
+    private void Crouch()
+    {
+        //if we want the character to crouch
         if (Input.GetButtonDown("Crouch"))
         {
             crouch = true;
@@ -34,12 +46,12 @@ public class playerMovement : MonoBehaviour
         }
     }
 
-    
-
-     void FixedUpdate()
+    void FixedUpdate()
     {
        //Move our character
        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
-        jump = false;
+       jump = false; // To make sure the player jumps only once
     }
+
+    //protected abstract void SpecialAbility();
 }
