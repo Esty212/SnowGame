@@ -1,27 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Spikes : MonoBehaviour
 {
-    int damageFromSpike = 0;
+    [SerializeField] int damageFromSpike = 0;
 
-    void Update()
-    {
-
-    }
+    private static UnityEvent<int> _onTakeDamage = new UnityEvent<int>();
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.gameObject.SetActive(true);
-        damageFromSpike += 2;
-        Debug.Log("Player Damaged!");
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _onTakeDamage.Invoke(damageFromSpike);
+            Debug.Log("Damaged");
 
+        }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    public static void AddOnTakeDamageEventListener(UnityAction<int> newListener)
     {
-        collision.gameObject.SetActive(false);
+        _onTakeDamage.AddListener(newListener);
     }
 
 }

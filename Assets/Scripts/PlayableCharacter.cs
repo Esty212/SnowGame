@@ -14,6 +14,10 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable
     [SerializeField] protected bool jump = false;
     protected bool crouch = false;
 
+    protected int maxMp = 5;
+    protected int currentHp;
+
+
     protected virtual void Update()
     {
         Movement();
@@ -66,6 +70,11 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        throw new System.NotImplementedException();
+        if (currentHp <= 0)
+        {
+            currentHp = 0;
+            Debug.Log("You died.");
+
+        }
     }
 }
