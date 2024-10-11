@@ -14,8 +14,18 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable
     [SerializeField] protected bool jump = false;
     protected bool crouch = false;
 
-    protected int maxMp = 5;
-    protected int currentHp;
+    [SerializeField] protected int maxHp = 3;
+    [SerializeField] protected int currentHp;
+
+    protected bool isAlive = true;
+    private float _fallBorder;
+    public Vector3 _lastSafePosition;
+
+    private void Start()
+    {
+        _fallBorder = GameObject.Find("FallBorder").transform.position.y;
+        currentHp = maxHp;
+    }
 
 
     protected virtual void Update()
@@ -30,6 +40,17 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable
         if (Input.GetKeyDown(KeyCode.X))
         {
             SpecialAbility();
+        }
+
+        if (transform.position.y < _fallBorder)
+        {
+            Respawn();
+            TakeDamage(1);
+
+        }
+        else if (controller.m_Grounded)
+        {
+            _lastSafePosition = transform.position;
         }
 
         //Crouch();
@@ -64,8 +85,19 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable
     protected abstract void SpecialAbility();
 
     public void TakeDamage(int damageTaken)
-    {
-        throw new System.NotImplementedException();
+    {      
+        //if spikes touch player or player falls to river, damage -=1. 
+        if (isAlive)
+        {
+                currentHp -= damageTaken;
+                Debug.Log("You fell.");
+        }
+        else
+        {
+            Die();
+        }
+            
+        
     }
 
     public void Die()
@@ -73,8 +105,14 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable
         if (currentHp <= 0)
         {
             currentHp = 0;
+            isAlive = false;
             Debug.Log("You died.");
 
         }
+    }
+
+    protected void Respawn()
+    {
+        transform.position = _lastSafePosition;
     }
 }
