@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-public class CharacterController2D : MonoBehaviour
+public class CharacterController2D : MonoBehaviour, IDamageable
 {
-	[SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
+    [SerializeField] private int maxHp = 3;
+    [SerializeField] private int currentHp;
+
+    [SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
@@ -39,7 +43,11 @@ public class CharacterController2D : MonoBehaviour
 
 		if (OnCrouchEvent == null)
 			OnCrouchEvent = new BoolEvent();
-	}
+
+        currentHp = maxHp;
+        KillPlayer.AddFallFromRiverListener(OnPlayerFell);
+		Spikes.AddOnTakeDamageEventListener(OnHitSpikes);
+    }
 
 	private void FixedUpdate()
 	{
@@ -143,4 +151,42 @@ public class CharacterController2D : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
+    public void TakeDamage(int damageTaken)
+    {
+        //if spikes touch player or player falls to river, damage -=1. 
+        if (currentHp > 0)
+        {
+            currentHp -= damageTaken;
+
+        }
+        if (currentHp <= 0)
+        {
+            Die();
+        }
+
+    }
+
+    public void Die()
+    {
+		Debug.Log("You died.");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        currentHp = 3;
+    }
+
+	private void OnHitSpikes(int damageTaken, Vector2 knockBackForce)
+	{
+		TakeDamage(damageTaken);
+		Vector2 direction = new(-Mathf.Sign(transform.localScale.x), 1f);
+		m_Rigidbody2D.AddForce(direction * knockBackForce);
+	}
+
+
+    private void OnPlayerFell(Vector3 newPosition)
+    {
+        Debug.Log("You fell.");
+        transform.position = newPosition;
+        TakeDamage(1);
+    }
+
 }

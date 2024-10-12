@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public abstract class PlayableCharacter : MonoBehaviour, IDamageable
+public abstract class PlayableCharacter : MonoBehaviour
 {
 
     public CharacterController2D controller;
@@ -15,17 +16,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable
 
     [SerializeField] protected bool jump = false;
     protected bool crouch = false;
-
-    [SerializeField] protected int maxHp = 3;
-    [SerializeField] protected int currentHp;
-
-    //protected bool isAlive = true;
-    //public Vector3 _lastSafePosition;
-
-    private void Start()
-    {
-        currentHp = maxHp;
-    }
 
 
     protected virtual void Update()
@@ -40,17 +30,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable
         if (Input.GetKeyDown(KeyCode.X))
         {
             SpecialAbility();
-        }
-
-        /*if (controller.m_Grounded)
-        {
-            _lastSafePosition = transform.position;
-        }*/
-
-        if (Input.GetKey(KeyCode.P))
-        {
-            Time.timeScale = 1f;
-            Die();
         }
 
         //Crouch();
@@ -71,47 +50,19 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable
         }
         else if (Input.GetButtonUp("Crouch"))
         {
-            crouch = false; 
+            crouch = false;
         }
     }
 
     protected virtual void FixedUpdate()
     {
-       //Move our character
-       controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
-       jump = false; // To make sure the player jumps only once
+        //Move our character
+        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+        jump = false; // To make sure the player jumps only once
     }
 
     protected abstract void SpecialAbility();
 
-    public void TakeDamage(int damageTaken)
-    {      
-        //if spikes touch player or player falls to river, damage -=1. 
-        if (currentHp > 0)
-        {
-                currentHp -= damageTaken;
-                Debug.Log("You fell.");
-        }
-        else if (currentHp <= 0)
-        {
-            Die();
-        }     
-        
-    }
 
-    public void Die()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        currentHp = 3;
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Border") || collision.gameObject.CompareTag("Spikes"))
-        {
-            TakeDamage(1);
-        }
-    }
 
 }

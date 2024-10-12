@@ -6,24 +6,24 @@ using UnityEngine.Events;
 
 public class Spikes : MonoBehaviour
 {
-    [SerializeField] int damageFromSpike = 0;
+    [SerializeField] private int damageFromSpike = 1;
+    [SerializeField] private Vector2 knockBackForce;
 
-    private static UnityEvent<int> _onTakeDamage = new UnityEvent<int>();
+    private static UnityEvent<int, Vector2> OnTakeDamage = new UnityEvent<int, Vector2>();
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            _onTakeDamage.Invoke(damageFromSpike);
-            damageFromSpike++;
+            OnTakeDamage.Invoke(damageFromSpike, knockBackForce);
             Debug.Log("Damaged");
 
         }
     }
 
-    public static void AddOnTakeDamageEventListener(UnityAction<int> newListener)
+    public static void AddOnTakeDamageEventListener(UnityAction<int, Vector2> newListener)
     {
-        _onTakeDamage.AddListener(newListener);
+        OnTakeDamage.AddListener(newListener);
     }
 
 }
