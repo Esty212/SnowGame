@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class PlayableCharacter : MonoBehaviour, IDamageable
 {
@@ -17,13 +19,11 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable
     [SerializeField] protected int maxHp = 3;
     [SerializeField] protected int currentHp;
 
-    protected bool isAlive = true;
-    private float _fallBorder;
-    public Vector3 _lastSafePosition;
+    //protected bool isAlive = true;
+    //public Vector3 _lastSafePosition;
 
     private void Start()
     {
-        _fallBorder = GameObject.Find("FallBorder").transform.position.y;
         currentHp = maxHp;
     }
 
@@ -42,15 +42,15 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable
             SpecialAbility();
         }
 
-        if (transform.position.y < _fallBorder)
-        {
-            Respawn();
-            TakeDamage(1);
-
-        }
-        else if (controller.m_Grounded)
+        /*if (controller.m_Grounded)
         {
             _lastSafePosition = transform.position;
+        }*/
+
+        if (Input.GetKey(KeyCode.P))
+        {
+            Time.timeScale = 1f;
+            Die();
         }
 
         //Crouch();
@@ -87,32 +87,31 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable
     public void TakeDamage(int damageTaken)
     {      
         //if spikes touch player or player falls to river, damage -=1. 
-        if (isAlive)
+        if (currentHp > 0)
         {
                 currentHp -= damageTaken;
                 Debug.Log("You fell.");
         }
-        else
+        else if (currentHp <= 0)
         {
             Die();
-        }
-            
+        }     
         
     }
 
     public void Die()
     {
-        if (currentHp <= 0)
-        {
-            currentHp = 0;
-            isAlive = false;
-            Debug.Log("You died.");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        currentHp = 3;
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Border") || collision.gameObject.CompareTag("Spikes"))
+        {
+            TakeDamage(1);
         }
     }
 
-    protected void Respawn()
-    {
-        transform.position = _lastSafePosition;
-    }
 }

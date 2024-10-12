@@ -173,6 +173,7 @@ MonoBehaviour:
   jump: 0
   maxHp: 3
   currentHp: 0
+  _lastSafePosition: {x: 0, y: 0, z: 0}
   icePower: {fileID: 779583417}
 --- !u!1 &304863805
 GameObject:
@@ -400,6 +401,7 @@ MonoBehaviour:
   jump: 0
   maxHp: 3
   currentHp: 0
+  _lastSafePosition: {x: 0, y: 0, z: 0}
   windPower: {fileID: 304863808}
 --- !u!1 &429543905
 GameObject:
@@ -763,6 +765,7 @@ MonoBehaviour:
   jump: 0
   maxHp: 3
   currentHp: 0
+  _lastSafePosition: {x: 0, y: 0, z: 0}
   firePower: {fileID: 821501746}
 --- !u!1 &779583414
 GameObject:
@@ -1473,7 +1476,7 @@ Transform:
   m_GameObject: {fileID: 1275068689}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4, z: 0}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1667,6 +1670,7 @@ MonoBehaviour:
   m_GroundCheck: {fileID: 1336558014}
   m_CeilingCheck: {fileID: 1276792908}
   m_CrouchDisableCollider: {fileID: 0}
+  m_Grounded: 0
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []

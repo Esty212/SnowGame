@@ -15,6 +15,7 @@ public class Spikes : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             _onTakeDamage.Invoke(damageFromSpike);
+            damageFromSpike++;
             Debug.Log("Damaged");
 
         }
