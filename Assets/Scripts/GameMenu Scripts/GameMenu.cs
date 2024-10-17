@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameMenu : MonoBehaviour
@@ -16,18 +17,5 @@ public class GameMenu : MonoBehaviour
         Application.Quit();
         Debug.Log("Game has quit.");
     }
-
-    public void muteToggle(bool muted)
-    {
-    if (muted)
-        {
-            AudioListener.volume = 0;
-        }
-        else
-        {
-            AudioListener.volume = 1;
-        }
-    }
-
 
 }
