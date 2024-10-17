@@ -14,7 +14,7 @@ public abstract class PlayableCharacter : MonoBehaviour
 
     public float runSpeed = 40f;
 
-    [SerializeField] protected bool jump = false;
+    protected bool jump = false;
     protected bool crouch = false;
 
 

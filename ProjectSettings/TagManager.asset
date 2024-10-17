@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Border
   - Spikes
+  - Carrot
   layers:
   - Default
   - TransparentFX
