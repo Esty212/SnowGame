@@ -1,25 +1,23 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Carrots : MonoBehaviour
 {
-    [SerializeField] private int carrotValue;
-    private bool hasTriggered;
-
-    private CarrotsManager carrotsManager;
-
-    private void Start()
-    {
-        carrotsManager = CarrotsManager.instance;
-    }
+    private static UnityEvent OnCarrotCollected = new();
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ( collision.CompareTag("Player") && !hasTriggered)
+        if (collision.CompareTag("Player"))
         {
-            hasTriggered = true;
-            carrotsManager.ChangeCarrots(carrotValue);
+            OnCarrotCollected.Invoke();
             Destroy(gameObject);
         }
+    }
+
+    public static void AddOnCarrotCollectedEventListener(UnityAction newListener)
+    {
+        OnCarrotCollected.AddListener(newListener);
     }
 
 }

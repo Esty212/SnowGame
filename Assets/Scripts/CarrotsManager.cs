@@ -1,31 +1,26 @@
-
 using UnityEngine;
 using TMPro;
 
 public class CarrotsManager : MonoBehaviour
 {
-    public static CarrotsManager instance;
+    public int CarrotsCount { get; private set; }
 
-    private int carrotsCount;
 
     [SerializeField] private TMP_Text carrotsDisplay;
 
-    private void Awake()
+    private void Start()
     {
-        if (!instance)
-        {
-            instance = this;
-        }
+        CarrotsCount = 0;
+        Carrots.AddOnCarrotCollectedEventListener(ChangeCarrots);
     }
 
     private void OnGUI()
     {
-        carrotsDisplay.text = carrotsCount.ToString();
+        carrotsDisplay.text = CarrotsCount.ToString();
     }
 
-    public void ChangeCarrots(int amount)
+    public void ChangeCarrots()
     {
-        carrotsCount += amount;
+        CarrotsCount++;
     }
-
 }
