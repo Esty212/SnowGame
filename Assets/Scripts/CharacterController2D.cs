@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -6,6 +7,7 @@ public class CharacterController2D : MonoBehaviour, IDamageable
 {
     [SerializeField] private int maxHp = 3;
     [SerializeField] private int currentHp;
+	public GameObject text_GameOver, heartsLife1, heartsLife2, heartsLife3, text_TryAgain;
 
     [SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
@@ -47,9 +49,46 @@ public class CharacterController2D : MonoBehaviour, IDamageable
         currentHp = maxHp;
         KillPlayer.AddFallFromRiverListener(OnPlayerFell);
 		Spikes.AddOnTakeDamageEventListener(OnHitSpikes);
+
+        heartsLife1.SetActive(true);
+        heartsLife2.SetActive(true);
+        heartsLife3.SetActive(true);
+        text_GameOver.SetActive(false);
+        text_TryAgain.SetActive(false);
+
     }
 
-	private void FixedUpdate()
+
+    private void Update()
+    {
+        switch (currentHp)
+		{
+			case 1:
+				{
+                    heartsLife1.SetActive(true);
+                    heartsLife2.SetActive(false);
+                    heartsLife3.SetActive(false);
+                    break;
+                }
+				case 2:
+				{
+					heartsLife1.SetActive(true);
+					heartsLife2.SetActive(true);
+					heartsLife3.SetActive(false);
+					break;
+				}
+				case 3:
+				{
+                    heartsLife1.SetActive(true);
+                    heartsLife2.SetActive(true);
+                    heartsLife3.SetActive(true);
+					break;
+                }
+
+        }
+    }
+
+    private void FixedUpdate()
 	{
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
@@ -169,9 +208,12 @@ public class CharacterController2D : MonoBehaviour, IDamageable
 
     public void Die()
     {
-		Debug.Log("You died.");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        currentHp = 3;
+		Time.timeScale = 0;
+        heartsLife1.SetActive(false);
+        heartsLife2.SetActive(false);
+        heartsLife3.SetActive(false);
+        text_GameOver.SetActive(true);
+        text_TryAgain.SetActive(true);
     }
 
 	private void OnHitSpikes(int damageTaken, Vector2 knockBackForce)
