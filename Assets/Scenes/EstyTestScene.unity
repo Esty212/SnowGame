@@ -253,7 +253,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1588524054}
+  powerImage: {fileID: 1625506246}
+  characterSprite: {fileID: 1580857057}
   runSpeed: 40
+  takeDamage: 0
   icePower: {fileID: 779583417}
 --- !u!1 &20425105 stripped
 GameObject:
@@ -289,7 +292,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.027771287, y: 0.11136819}
@@ -1675,7 +1678,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1588524054}
+  powerImage: {fileID: 1386164051}
+  characterSprite: {fileID: 796074934}
   runSpeed: 40
+  takeDamage: 0
   windPower: {fileID: 304863808}
 --- !u!1 &427002764
 GameObject:
@@ -2149,9 +2155,6 @@ MonoBehaviour:
   player1: {fileID: 15604245}
   player2: {fileID: 654361802}
   player3: {fileID: 356372148}
-  icePowerPic: {fileID: 1625506244}
-  firePowerPic: {fileID: 1708627908}
-  windPowerPic: {fileID: 1386164049}
 --- !u!4 &624388639
 Transform:
   m_ObjectHideFlags: 0
@@ -2183,7 +2186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &654361809
 Transform:
   m_ObjectHideFlags: 0
@@ -2214,7 +2217,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1588524054}
+  powerImage: {fileID: 1708627910}
+  characterSprite: {fileID: 326144344}
   runSpeed: 40
+  takeDamage: 0
   firePower: {fileID: 821501746}
 --- !u!1 &716692903
 GameObject:
@@ -4731,7 +4737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 3
-  currentHp: 0
+  currentHp: 3
   text_GameOver: {fileID: 1937900354}
   heartsLife1: {fileID: 1591340467}
   heartsLife2: {fileID: 1221612817}
@@ -4743,7 +4749,7 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 17
   m_GroundCheck: {fileID: 1336558014}
   m_CeilingCheck: {fileID: 1276792908}
   m_CrouchDisableCollider: {fileID: 0}
@@ -4763,7 +4769,7 @@ Transform:
   m_GameObject: {fileID: 1588524052}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.69, y: -1.9, z: 0.011464114}
+  m_LocalPosition: {x: 27.03, y: -2.25, z: 0.011464114}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5327,7 +5333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageFromSpike: 1
-  knockBackForce: {x: 10, y: 10}
+  knockBackForce: {x: 1000, y: 200}
 --- !u!61 &1801726617
 BoxCollider2D:
   m_ObjectHideFlags: 0
