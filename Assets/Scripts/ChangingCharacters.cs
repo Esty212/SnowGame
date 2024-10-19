@@ -15,32 +15,27 @@ public class ChangingCharacters : MonoBehaviour
         {
             PlayerSwitch();
         }
-        
     }
 
     void PlayerSwitch()
     {
-            if (player1.activeSelf)
-            {
-                player2.SetActive(true);
-                player3.SetActive(false);
-                player1.SetActive(false);
-
-
-            }
-            else if (player2.activeSelf)
-            {
-                player2.SetActive(false);
-                player3.SetActive(true);
-                player1.SetActive(false);
-
-            }
-            else if (player3.activeSelf)
-            {
-                player2.SetActive(false);
-                player3.SetActive(false);
-                player1.SetActive(true);
-
-            }
+        if (player1.activeSelf)
+        {
+            player2.SetActive(true);
+            player3.SetActive(false);
+            player1.SetActive(false);
+        }
+        else if (player2.activeSelf)
+        {
+            player2.SetActive(false);
+            player3.SetActive(true);
+            player1.SetActive(false);
+        }
+        else if (player3.activeSelf)
+        {
+            player2.SetActive(false);
+            player3.SetActive(false);
+            player1.SetActive(true);
+        }
     }
 }

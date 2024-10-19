@@ -1,9 +1,15 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-public class CharacterController2D : MonoBehaviour
+public class CharacterController2D : MonoBehaviour, IDamageable
 {
-	[SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
+    [SerializeField] private int maxHp = 3;
+    [SerializeField] private int currentHp;
+	public GameObject text_GameOver, heartsLife1, heartsLife2, heartsLife3, text_TryAgain;
+
+    [SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;			// Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
@@ -13,7 +19,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when crouching
 
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-	private bool m_Grounded;            // Whether or not the player is grounded.
+	public bool m_Grounded;            // Whether or not the player is grounded.
 	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
@@ -39,9 +45,50 @@ public class CharacterController2D : MonoBehaviour
 
 		if (OnCrouchEvent == null)
 			OnCrouchEvent = new BoolEvent();
-	}
 
-	private void FixedUpdate()
+        currentHp = maxHp;
+        KillPlayer.AddFallFromRiverListener(OnPlayerFell);
+		Spikes.AddOnTakeDamageEventListener(OnHitSpikes);
+
+        heartsLife1.SetActive(true);
+        heartsLife2.SetActive(true);
+        heartsLife3.SetActive(true);
+        text_GameOver.SetActive(false);
+        text_TryAgain.SetActive(false);
+
+    }
+
+
+    private void Update()
+    {
+        switch (currentHp)
+		{
+			case 1:
+				{
+                    heartsLife1.SetActive(true);
+                    heartsLife2.SetActive(false);
+                    heartsLife3.SetActive(false);
+                    break;
+                }
+				case 2:
+				{
+					heartsLife1.SetActive(true);
+					heartsLife2.SetActive(true);
+					heartsLife3.SetActive(false);
+					break;
+				}
+				case 3:
+				{
+                    heartsLife1.SetActive(true);
+                    heartsLife2.SetActive(true);
+                    heartsLife3.SetActive(true);
+					break;
+                }
+
+        }
+    }
+
+    private void FixedUpdate()
 	{
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
@@ -51,7 +98,7 @@ public class CharacterController2D : MonoBehaviour
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
 		for (int i = 0; i < colliders.Length; i++)
 		{
-			if (colliders[i].gameObject != gameObject)
+			if (colliders[i].gameObject != gameObject && colliders[i].isTrigger == false)
 			{
 				m_Grounded = true;
 				if (!wasGrounded)
@@ -143,4 +190,45 @@ public class CharacterController2D : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
+    public void TakeDamage(int damageTaken)
+    {
+        //if spikes touch player or player falls to river, damage -=1. 
+        if (currentHp > 0)
+        {
+            currentHp -= damageTaken;
+
+        }
+        if (currentHp <= 0)
+        {
+            Die();
+        }
+
+    }
+
+    public void Die()
+    {
+		Time.timeScale = 0;
+        heartsLife1.SetActive(false);
+        heartsLife2.SetActive(false);
+        heartsLife3.SetActive(false);
+        text_GameOver.SetActive(true);
+        text_TryAgain.SetActive(true);
+    }
+
+	private void OnHitSpikes(int damageTaken, Vector2 knockBackForce)
+	{
+		TakeDamage(damageTaken);
+		Vector2 direction = new(-Mathf.Sign(transform.localScale.x), 1f);
+		m_Rigidbody2D.AddForce(direction * knockBackForce);
+	}
+
+
+    private void OnPlayerFell(Vector3 newPosition)
+    {
+        Debug.Log("You fell.");
+        transform.position = newPosition;
+        TakeDamage(1);
+    }
+
 }

@@ -7,28 +7,29 @@ using UnityEngine.Events;
 
 public class WindPower : MonoBehaviour
 {
-    private bool _inRange;
-    private UnityEvent<float> windBlow = new UnityEvent<float>();
     [SerializeField] private float blowPower;
+    private IceCubeMovement _objectToBlow;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _inRange = true;
+        IceCubeMovement potentialObject = collision.GetComponent<IceCubeMovement>();
+        if (potentialObject)
+        {
+            _objectToBlow = potentialObject;
+        }    
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _inRange = false;
-    }
-
-    public void AddWindBlowEventListener(UnityAction<float> newListener)
-    {
-        windBlow.AddListener(newListener);
+        if (_objectToBlow && collision.gameObject == _objectToBlow.gameObject)
+        {
+            _objectToBlow = null;
+        }
     }
 
     public void OnBlow()
     {
-        if (_inRange)
-            windBlow.Invoke(Mathf.Sign(transform.localScale.x) * blowPower);  
+        if (_objectToBlow)
+            _objectToBlow.Blow(Mathf.Sign(transform.localScale.x) * blowPower);  
     }
 }
