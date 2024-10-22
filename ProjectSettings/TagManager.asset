@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Border
   - Spikes
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -51,4 +52,7 @@ TagManager:
     locked: 0
   - name: Particles
     uniqueID: 3610943057
+    locked: 0
+  - name: Projectile
+    uniqueID: 2412232067
     locked: 0
