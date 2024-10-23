@@ -25,7 +25,9 @@ public class CharacterController2D : MonoBehaviour, IDamageable
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
 
-	[Header("Events")]
+
+
+    [Header("Events")]
 	[Space]
 
 	public UnityEvent OnLandEvent;
@@ -35,6 +37,9 @@ public class CharacterController2D : MonoBehaviour, IDamageable
 
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
+
+	private bool _canTakeDamage = true;
+	private UnityEvent<int, Vector2> _onHitSpikes = new();
 
 	private void Awake()
 	{
@@ -55,6 +60,8 @@ public class CharacterController2D : MonoBehaviour, IDamageable
         heartsLife3.SetActive(true);
         text_GameOver.SetActive(false);
         text_TryAgain.SetActive(false);
+
+		PlayableCharacter.AddOnDoneFlashingEventListener(OnDoneFlashing);
 
     }
 
@@ -218,17 +225,31 @@ public class CharacterController2D : MonoBehaviour, IDamageable
 
 	private void OnHitSpikes(int damageTaken, Vector2 knockBackForce)
 	{
-		TakeDamage(damageTaken);
+		if (_canTakeDamage)
+		{
+			_canTakeDamage = false;
+			TakeDamage(damageTaken);
+			_onHitSpikes.Invoke(damageTaken, knockBackForce);
+		}
 		Vector2 direction = new(-Mathf.Sign(transform.localScale.x), 1f);
 		m_Rigidbody2D.AddForce(direction * knockBackForce);
+	}
+
+	private void OnDoneFlashing()
+	{
+		_canTakeDamage = true;
 	}
 
 
     private void OnPlayerFell(Vector3 newPosition)
     {
-        Debug.Log("You fell.");
         transform.position = newPosition;
         TakeDamage(1);
     }
+
+	public void AddOnHitSpikesEventListener(UnityAction<int, Vector2> newListener)
+	{
+		_onHitSpikes.AddListener(newListener);
+	}
 
 }

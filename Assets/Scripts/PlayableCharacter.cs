@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -19,13 +21,15 @@ public abstract class PlayableCharacter : MonoBehaviour
     protected bool jump = false;
     protected bool crouch = false;
 
-    public bool takeDamage;
     private int flickerAmount = 3;
     private float flickerDuration = 0.1f;
 
-    private void Start()
+
+    private static UnityEvent OnDoneFlashing = new();
+    
+    protected void Start()
     {
-        Spikes.AddOnTakeDamageEventListener(Flash);
+        controller.AddOnHitSpikesEventListener(Flash);
     }
 
     protected virtual void Update()
@@ -97,7 +101,12 @@ public abstract class PlayableCharacter : MonoBehaviour
             characterSprite.color = Color.white;
             yield return new WaitForSeconds(flickerDuration);
         }
-        
+        OnDoneFlashing.Invoke();
+    }
+
+    public static void AddOnDoneFlashingEventListener(UnityAction newListener)
+    {
+        OnDoneFlashing.AddListener(newListener);
     }
 
     protected abstract void SpecialAbility();

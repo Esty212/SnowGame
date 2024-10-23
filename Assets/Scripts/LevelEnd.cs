@@ -30,7 +30,8 @@ public class LevelEnd : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        text_Almost.SetActive(false);
+        if (text_Almost)
+            text_Almost.SetActive(false);
     }
 
 }
