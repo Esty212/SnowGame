@@ -8,20 +8,7 @@ public class IceCubeMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rbCube;
 
-
-
-    void Start()
-    {
-        WindPower windPower = FindAnyObjectByType<WindPower>(FindObjectsInactive.Include);
-        if (windPower != null)
-            windPower.AddWindBlowEventListener(OnBlown);
-    }
-
-
-
-
-
-    private void OnBlown(float blowPower)
+    public void Blow(float blowPower)
     {
         rbCube.AddForce(blowPower * Vector2.right, ForceMode2D.Impulse);
     }

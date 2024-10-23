@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Border
   - Spikes
-  - FxTemporaire
+  - Carrot
   layers:
   - Default
   - TransparentFX
@@ -16,7 +16,7 @@ TagManager:
   - UI
   - Fire
   - Border
-  - particles
+  - 
   - 
   - 
   - 
@@ -49,10 +49,4 @@ TagManager:
     locked: 0
   - name: grounds
     uniqueID: 1944758501
-    locked: 0
-  - name: Particles
-    uniqueID: 3610943057
-    locked: 0
-  - name: Projectile
-    uniqueID: 2412232067
     locked: 0
