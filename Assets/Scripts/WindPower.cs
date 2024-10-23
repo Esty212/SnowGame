@@ -8,15 +8,20 @@ using UnityEngine.Events;
 public class WindPower : MonoBehaviour
 {
     [SerializeField] private float blowPower;
-    private IceCubeMovement _objectToBlow;
+    private BlowableObject _objectToBlow;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IceCubeMovement potentialObject = collision.GetComponent<IceCubeMovement>();
+        /*IceCubeMovement potentialObject = collision.GetComponent<IceCubeMovement>();
         if (potentialObject)
         {
             _objectToBlow = potentialObject;
-        }    
+        }*/
+        BlowableObject potentialObject = collision.GetComponent<BlowableObject>();
+        if (potentialObject)
+        {
+            _objectToBlow = potentialObject;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

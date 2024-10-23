@@ -11,7 +11,7 @@ public class FirePower : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IceCubeMovement foundIceCube = collision.GetComponent<IceCubeMovement>();
+        MeltableObject foundIceCube = collision.GetComponent<MeltableObject>();
         if (foundIceCube != null)
         {
             _iceCube = foundIceCube.gameObject;
