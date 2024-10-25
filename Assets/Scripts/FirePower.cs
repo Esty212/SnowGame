@@ -12,7 +12,7 @@ public class FirePower : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         MeltableObject foundIceCube = collision.GetComponent<MeltableObject>();
-        if (foundIceCube != null)
+        if (foundIceCube)
         {
             _iceCube = foundIceCube.gameObject;
         }
@@ -20,7 +20,8 @@ public class FirePower : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _iceCube = null;
+        if (_iceCube && collision.gameObject == _iceCube)
+            _iceCube = null;
     }
 
     public void DestroyIceCube()

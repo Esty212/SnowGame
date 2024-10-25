@@ -12,11 +12,6 @@ public class WindPower : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*IceCubeMovement potentialObject = collision.GetComponent<IceCubeMovement>();
-        if (potentialObject)
-        {
-            _objectToBlow = potentialObject;
-        }*/
         BlowableObject potentialObject = collision.GetComponent<BlowableObject>();
         if (potentialObject)
         {
