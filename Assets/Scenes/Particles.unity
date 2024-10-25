@@ -919,11 +919,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5112403345868107845, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.9
+      value: -6.27
       objectReference: {fileID: 0}
     - target: {fileID: 5112403345868107845, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.8
+      value: -3.81
       objectReference: {fileID: 0}
     - target: {fileID: 5112403345868107845, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1241,8 +1241,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1653342651}
+  powerImage: {fileID: 0}
+  characterSprite: {fileID: 0}
   runSpeed: 40
-  jump: 0
   firePower: {fileID: 1864019855}
 --- !u!1 &610060199
 GameObject:
@@ -1550,8 +1551,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1653342651}
+  powerImage: {fileID: 0}
+  characterSprite: {fileID: 0}
   runSpeed: 40
-  jump: 0
   icePower: {fileID: 229826379}
 --- !u!1001 &859728426
 PrefabInstance:
@@ -7994,6 +7996,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 3
   currentHp: 0
+  text_GameOver: {fileID: 0}
+  heartsLife1: {fileID: 0}
+  heartsLife2: {fileID: 0}
+  heartsLife3: {fileID: 0}
+  text_TryAgain: {fileID: 0}
   m_JumpForce: 580
   m_CrouchSpeed: 0.4
   m_MovementSmoothing: 0.05
@@ -9109,8 +9116,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1653342651}
+  powerImage: {fileID: 0}
+  characterSprite: {fileID: 0}
   runSpeed: 40
-  jump: 0
   windPower: {fileID: 722062008}
 --- !u!4 &2005307694
 Transform:
