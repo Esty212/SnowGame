@@ -9,6 +9,7 @@ public class FireMan : PlayableCharacter
     protected override void SpecialAbility()
     {
         firePower.DestroyIceCube();
+        firePower.ApplyDamageToEnemy();
     }
 
 

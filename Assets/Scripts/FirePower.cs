@@ -7,7 +7,10 @@ using UnityEngine.Events;
 public class FirePower : MonoBehaviour
 {
     [SerializeField] private float meltingTime;
+    [SerializeField] private int damageAmount = 1;
     private GameObject _iceCube;
+    Monster _enemy;
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,12 +19,22 @@ public class FirePower : MonoBehaviour
         {
             _iceCube = foundIceCube.gameObject;
         }
+
+        Monster foundMonster = collision.GetComponent<Monster>();
+        if (foundMonster != null)
+        {
+            _enemy = foundMonster;
+        }
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         _iceCube = null;
+        _enemy = null;
+
     }
+
 
     public void DestroyIceCube()
     {
@@ -31,5 +44,13 @@ public class FirePower : MonoBehaviour
         }
     }
 
+    public void ApplyDamageToEnemy()
+    {
+        if (_enemy != null)
+        {
+            _enemy.TakeDamage(damageAmount);
+
+        }
+    }
 
 }
