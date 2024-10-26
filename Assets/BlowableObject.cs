@@ -9,6 +9,7 @@ public class BlowableObject : MonoBehaviour
 
     public void Blow(float blowPower)
     {
+        rigidBodyRef.bodyType = RigidbodyType2D.Dynamic;
         rigidBodyRef.AddForce(blowPower * Vector2.right, ForceMode2D.Impulse);
     }
 

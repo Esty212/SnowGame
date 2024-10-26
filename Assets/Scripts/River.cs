@@ -16,7 +16,6 @@ public class River : MonoBehaviour
 
     public void Freeze()
     {
-        Debug.Log("Froze");
         _riverCollider.isTrigger = false;
         spriteRenderer.sprite = frozenRiver;
     }

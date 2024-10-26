@@ -13,6 +13,7 @@ public abstract class PlayableCharacter : MonoBehaviour
     public CharacterController2D controller;
     [SerializeField] private Image powerImage;
     [SerializeField] private SpriteRenderer characterSprite;
+    [SerializeField] private ParticleSystem particlePower;
 
     protected float horizontalMove = 0f;
 
@@ -43,10 +44,18 @@ public abstract class PlayableCharacter : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            SpecialAbility();
+            StartCoroutine(OnActivatedSpecialPower());
         }
 
         //Crouch();
+    }
+
+    private IEnumerator OnActivatedSpecialPower()
+    {
+        particlePower.Play();
+        float delay = particlePower.main.duration;
+        yield return new WaitForSeconds(delay);
+        SpecialAbility();
     }
 
     private void OnDisable()

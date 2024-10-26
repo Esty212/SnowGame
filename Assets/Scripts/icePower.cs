@@ -18,8 +18,11 @@ public class IcePower : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (_river && collision.gameObject == _river.gameObject)
+        {
+            _river = null;
+        }
 
-        _river = null;
     }
 
     public void OnFreeze()
