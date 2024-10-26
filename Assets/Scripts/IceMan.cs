@@ -8,6 +8,6 @@ public class IceMan : PlayableCharacter
 
     protected override void SpecialAbility()
     {
-        icePower.OnFreeze();
+        icePower.OnFreeze(); 
     }
 }

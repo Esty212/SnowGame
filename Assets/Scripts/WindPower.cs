@@ -30,6 +30,6 @@ public class WindPower : MonoBehaviour
     public void OnBlow()
     {
         if (_objectToBlow)
-            _objectToBlow.Blow(Mathf.Sign(transform.localScale.x) * blowPower);  
+            _objectToBlow.Blow(Mathf.Sign(transform.lossyScale.x) * blowPower);  
     }
 }

@@ -18,7 +18,6 @@ public class LevelEnd : MonoBehaviour
         {
             if (carrotsManager.CarrotsCount == 3)
             {
-                Debug.Log("Level ends");
                 text_YouWon.SetActive(true);
                 Time.timeScale = 0;
             }
