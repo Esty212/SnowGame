@@ -29,7 +29,6 @@ public class FirePower : MonoBehaviour
         if (_meltableObject != null)
         {
             _meltableObject.Burn();
-            //Destroy(_meltableObject, meltingTime);
         }
     }
 

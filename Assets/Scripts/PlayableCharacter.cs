@@ -14,6 +14,8 @@ public abstract class PlayableCharacter : MonoBehaviour
     [SerializeField] private Image powerImage;
     [SerializeField] private SpriteRenderer characterSprite;
     [SerializeField] private ParticleSystem particlePower;
+    [SerializeField] private AudioSource powerAudioSource;
+
 
     protected float horizontalMove = 0f;
 
@@ -52,10 +54,12 @@ public abstract class PlayableCharacter : MonoBehaviour
 
     private IEnumerator OnActivatedSpecialPower()
     {
+        powerAudioSource.Play();
         particlePower.Play();
         float delay = particlePower.main.duration;
         yield return new WaitForSeconds(delay);
         SpecialAbility();
+        powerAudioSource.Stop();
     }
 
     private void OnDisable()
