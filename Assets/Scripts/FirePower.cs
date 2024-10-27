@@ -7,27 +7,29 @@ using UnityEngine.Events;
 public class FirePower : MonoBehaviour
 {
     [SerializeField] private float meltingTime;
-    private GameObject _iceCube;
+    private MeltableObject _meltableObject;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IceCubeMovement foundIceCube = collision.GetComponent<IceCubeMovement>();
-        if (foundIceCube != null)
+        MeltableObject foundMeltableObject = collision.GetComponent<MeltableObject>();
+        if (foundMeltableObject)
         {
-            _iceCube = foundIceCube.gameObject;
+            _meltableObject = foundMeltableObject;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _iceCube = null;
+        if (_meltableObject && collision.gameObject == _meltableObject)
+            _meltableObject = null;
     }
 
     public void DestroyIceCube()
     {
-        if (_iceCube != null)
+        if (_meltableObject != null)
         {
-            Destroy(_iceCube, meltingTime);
+            _meltableObject.Burn();
+            //Destroy(_meltableObject, meltingTime);
         }
     }
 
